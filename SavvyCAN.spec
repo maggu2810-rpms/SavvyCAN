@@ -2,7 +2,7 @@
 
 Name:           SavvyCAN
 Version:        213
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Qt based cross platform canbus tool
 
 License:        MIT
@@ -42,6 +42,10 @@ export PATH="%{_qt5_bindir}:$PATH"
 
 %install
 make install
+# Fix icons
+mv %{buildroot}/%{_datadir}/icons/icons/ %{buildroot}/%{_datadir}/icons_
+rmdir %{buildroot}/%{_datadir}/icons/
+mv %{buildroot}/%{_datadir}/icons_/ %{buildroot}/%{_datadir}/icons
   
 
 %files
@@ -67,10 +71,10 @@ make install
 %exclude %{_datadir}/savvycan/examples/examples/candump.log
 
 # icons
-%{_datadir}/icons/icons/SavvyIcon.icns
-%{_datadir}/icons/icons/SavvyIcon.png
-%{_datadir}/icons/icons/hicolor/256x256/apps/SavvyCAN.png
-%{_datadir}/icons/icons/hicolor/scalable/apps/SavvyCAN.png
+%exclude %{_datadir}/icons/SavvyIcon.icns
+%exclude %{_datadir}/icons/SavvyIcon.png
+%{_datadir}/icons/hicolor/256x256/apps/SavvyCAN.png
+%{_datadir}/icons/hicolor/scalable/apps/SavvyCAN.png
 
 # helpfiles
 %exclude %{_bindir}/help/bisector.md
